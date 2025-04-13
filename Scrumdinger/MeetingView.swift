@@ -6,43 +6,66 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct MeetingView: View {
+    @Binding var scrum: DailyScrum
+    @State private var scrumTimer: ScrumTimer?
+    private let player = AVPlayer.dingPlayer()
     var body: some View {
-        VStack {
-            ProgressView(value: 5, total: 15)
-            HStack{
-                VStack(alignment: .leading) {
-                    Text("Seconds Elapsed")
-                        .font(.caption)
-                    Label("300", systemImage: "hourglass.tophalf.fill")
-                }
-                Spacer()
-                VStack(alignment: .trailing) {
-                    Text("Seconds Remaining")
-                        .font(.caption)
-                    Label("600", systemImage: "hourglass.bottomhalf.fill")
+        ZStack {
+            RoundedRectangle(cornerRadius: 16)
+                .fill(scrum.theme.mainColor)
+            VStack {
+                if let timer = scrumTimer {
+                    MeetingHeaderView(
+                        secondsElapsed: timer.secondsElapsed,
+                        secondsRemaining: timer.secondsRemaining,
+                        theme: scrum.theme
+                    )
+                    
+                    Circle()
+                        .strokeBorder(lineWidth: 24)
+                    
+                    MeetingFooterView(
+                        speakers: timer.speakers,
+                        skipAction: timer.skipSpeaker
+                    )
+                } else {
+                    ProgressView("Starting...")
                 }
             }
-            .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Time remaining")
-            .accessibilityValue("10 minutes")
-            Circle()
-                .strokeBorder(lineWidth: 24)
             
-            HStack {
-                Text("Speaker 1 of 3")
-                Spacer()
-                Button(action: {}) {
-                    Image(systemName: "forward.fill")
-                }
-                .accessibilityLabel("Next speaker")
-            }
         }
         .padding()
+        .foregroundColor(scrum.theme.accentColor)
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            Task { @MainActor in
+                if scrumTimer == nil {
+                    scrumTimer = ScrumTimer()
+                }
+                scrumTimer?.reset(
+                    lengthInMinutes: scrum.lengthInMinutes,
+                    attendeeNames: scrum.attendees.map(\.name)
+                )
+                scrumTimer?.speakerChangedAction = {
+                    player.seek(to: .zero)
+                    player.play()
+                }
+                scrumTimer?.startScrum()
+            }
+        }
+        .onDisappear {
+            Task { @MainActor in
+                scrumTimer?.stopScrum()
+            }
+        }
     }
 }
 
 #Preview {
-    MeetingView()
+    @State var scrum = DailyScrum.sampleData[0]
+    return(
+        MeetingView(scrum: $scrum))
 }
