@@ -36,33 +36,47 @@ struct MeetingView: View {
                 }
             }
             
+            
         }
         .padding()
         .foregroundColor(scrum.theme.accentColor)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            Task { @MainActor in
-                if scrumTimer == nil {
-                    scrumTimer = ScrumTimer()
-                }
-                scrumTimer?.reset(
-                    lengthInMinutes: scrum.lengthInMinutes,
-                    attendeeNames: scrum.attendees.map(\.name)
-                )
-                scrumTimer?.speakerChangedAction = {
-                    player.seek(to: .zero)
-                    player.play()
-                }
-                scrumTimer?.startScrum()
-            }
+            startScrum()
         }
         .onDisappear {
-            Task { @MainActor in
-                scrumTimer?.stopScrum()
-            }
+            endScrum()
         }
     }
+    
+    private func startScrum(){
+        Task { @MainActor in
+            if scrumTimer == nil {
+                scrumTimer = ScrumTimer()
+            }
+            scrumTimer?.reset(
+                lengthInMinutes: scrum.lengthInMinutes,
+                attendeeNames: scrum.attendees.map(\.name)
+            )
+            scrumTimer?.speakerChangedAction = {
+                player.seek(to: .zero)
+                player.play()
+            }
+            scrumTimer?.startScrum()
+        }
+        
+    }
+    
+    private func endScrum(){
+        Task { @MainActor in
+            scrumTimer?.stopScrum()
+            let newHistory = History(attendees: scrum.attendees)
+            scrum.history.insert(newHistory, at: 0)
+        }
+    }
+
 }
+
 
 #Preview {
     @State var scrum = DailyScrum.sampleData[0]
