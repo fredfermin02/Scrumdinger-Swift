@@ -9,9 +9,13 @@ import SwiftUI
 import AVFoundation
 
 struct MeetingView: View {
-    @Binding var scrum: DailyScrum
+    @Environment(\.modelContext) private var context
+    let scrum: DailyScrum
     @State private var scrumTimer: ScrumTimer?
+    @Binding var errorWrapper: ErrorWrapper?
+    
     private let player = AVPlayer.dingPlayer()
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
@@ -45,7 +49,11 @@ struct MeetingView: View {
             startScrum()
         }
         .onDisappear {
-            endScrum()
+            do {
+                try endScrum()
+            } catch {
+                errorWrapper = ErrorWrapper(error: error, guidance: "Meeting time was not recorded. Try again later.")
+            }
         }
     }
     
@@ -67,11 +75,12 @@ struct MeetingView: View {
         
     }
     
-    private func endScrum(){
+    private func endScrum() throws{
         Task { @MainActor in
             scrumTimer?.stopScrum()
             let newHistory = History(attendees: scrum.attendees)
             scrum.history.insert(newHistory, at: 0)
+            try context.save()
         }
     }
 
@@ -79,7 +88,6 @@ struct MeetingView: View {
 
 
 #Preview {
-    @State var scrum = DailyScrum.sampleData[0]
-    return(
-        MeetingView(scrum: $scrum))
+    let scrum = DailyScrum.sampleData[0]
+    MeetingView(scrum: scrum, errorWrapper: .constant(nil))
 }
