@@ -11,6 +11,8 @@
 		6779DAAA2DAD5CEC0083BC7C /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6779DAA92DAD5CEC0083BC7C /* ErrorView.swift */; };
 		6779DAAC2DAD65ED0083BC7C /* MeetingTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6779DAAB2DAD65ED0083BC7C /* MeetingTimerView.swift */; };
 		6779DAAE2DAD67720083BC7C /* SpeakerArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6779DAAD2DAD67720083BC7C /* SpeakerArc.swift */; };
+		6779DAB12DAEB2230083BC7C /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6779DAB02DAEB2230083BC7C /* SpeechRecognizer.swift */; };
+		6779DAB32DAEB4330083BC7C /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6779DAB22DAEB4330083BC7C /* HistoryView.swift */; };
 		67F3FBF32DA969C6005D3E2B /* ScrumdingerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F3FBF22DA969C6005D3E2B /* ScrumdingerApp.swift */; };
 		67F3FBF52DA969C6005D3E2B /* MeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F3FBF42DA969C6005D3E2B /* MeetingView.swift */; };
 		67F3FBF72DA969C7005D3E2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67F3FBF62DA969C7005D3E2B /* Assets.xcassets */; };
@@ -62,6 +64,8 @@
 		6779DAA92DAD5CEC0083BC7C /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		6779DAAB2DAD65ED0083BC7C /* MeetingTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingTimerView.swift; sourceTree = "<group>"; };
 		6779DAAD2DAD67720083BC7C /* SpeakerArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerArc.swift; sourceTree = "<group>"; };
+		6779DAB02DAEB2230083BC7C /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
+		6779DAB22DAEB4330083BC7C /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		67F3FBEF2DA969C6005D3E2B /* Scrumdinger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scrumdinger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67F3FBF22DA969C6005D3E2B /* ScrumdingerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrumdingerApp.swift; sourceTree = "<group>"; };
 		67F3FBF42DA969C6005D3E2B /* MeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingView.swift; sourceTree = "<group>"; };
@@ -193,6 +197,7 @@
 				67F408F32DAC994F008D706B /* History.swift */,
 				67F408F52DACA6C7008D706B /* Attendee.swift */,
 				6779DAA72DAD5BBC0083BC7C /* ErrorWrapper.swift */,
+				6779DAB02DAEB2230083BC7C /* SpeechRecognizer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 				6779DAA92DAD5CEC0083BC7C /* ErrorView.swift */,
 				6779DAAB2DAD65ED0083BC7C /* MeetingTimerView.swift */,
 				6779DAAD2DAD67720083BC7C /* SpeakerArc.swift */,
+				6779DAB22DAEB4330083BC7C /* HistoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -315,6 +321,7 @@
 			packageReferences = (
 				67F3FC1D2DA96E76005D3E2B /* XCLocalSwiftPackageReference "ThemeKit" */,
 				67F408E52DAB1956008D706B /* XCLocalSwiftPackageReference "TimerKit" */,
+				6779DAAF2DAD6F660083BC7C /* XCLocalSwiftPackageReference "../../../Downloads/TranscribingSpeechToText/StartingProject/TutorialResources/TranscriptionKit" */,
 			);
 			productRefGroup = 67F3FBF02DA969C6005D3E2B /* Products */;
 			projectDirPath = "";
@@ -366,6 +373,7 @@
 				67F408DB2DA98777008D706B /* DetailView.swift in Sources */,
 				67F3FBF52DA969C6005D3E2B /* MeetingView.swift in Sources */,
 				6779DAAC2DAD65ED0083BC7C /* MeetingTimerView.swift in Sources */,
+				6779DAB32DAEB4330083BC7C /* HistoryView.swift in Sources */,
 				67F408D12DA97B5C008D706B /* Theme.swift in Sources */,
 				67F408D92DA9815E008D706B /* ScrumsView.swift in Sources */,
 				6779DAAA2DAD5CEC0083BC7C /* ErrorView.swift in Sources */,
@@ -382,6 +390,7 @@
 				67F408F62DACA6C7008D706B /* Attendee.swift in Sources */,
 				67F408DD2DAACF44008D706B /* DetailEditView.swift in Sources */,
 				67F408E22DAAD8F6008D706B /* ThemePicker.swift in Sources */,
+				6779DAB12DAEB2230083BC7C /* SpeechRecognizer.swift in Sources */,
 				67F3FBF32DA969C6005D3E2B /* ScrumdingerApp.swift in Sources */,
 				67F408D72DA97ED0008D706B /* TrailingIconLabelStyle.swift in Sources */,
 			);
@@ -549,6 +558,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Scrumdinger/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Audio is recorded to transcribe the meeting. Audio recordings are discarded after transcription.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "You can view a text transcription of your meeting in the app";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -578,6 +589,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Scrumdinger/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Audio is recorded to transcribe the meeting. Audio recordings are discarded after transcription.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "You can view a text transcription of your meeting in the app";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -711,6 +724,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		6779DAAF2DAD6F660083BC7C /* XCLocalSwiftPackageReference "../../../Downloads/TranscribingSpeechToText/StartingProject/TutorialResources/TranscriptionKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../Downloads/TranscribingSpeechToText/StartingProject/TutorialResources/TranscriptionKit;
+		};
 		67F3FC1D2DA96E76005D3E2B /* XCLocalSwiftPackageReference "ThemeKit" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ThemeKit;
